@@ -25,8 +25,8 @@
       <file leaf-file-name="Otimering.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Otimering.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45994064">
-              <caret line="31" column="99" selection-start-line="31" selection-start-column="99" selection-end-line="31" selection-end-column="99" />
+            <state vertical-scroll-proportion="0.6231454">
+              <caret line="42" column="140" selection-start-line="42" selection-start-column="140" selection-end-line="42" selection-end-column="140" />
               <folding />
             </state>
           </provider>
@@ -51,8 +51,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1824" />
-    <option name="y" value="-380" />
+    <option name="x" value="-1833" />
+    <option name="y" value="-389" />
     <option name="width" value="1784" />
     <option name="height" value="1131" />
   </component>
@@ -145,7 +145,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1824" y="-380" width="1784" height="1131" extended-state="0" />
+    <frame x="-1833" y="-389" width="1784" height="1131" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -178,8 +178,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Otimering.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45994064">
-          <caret line="31" column="99" selection-start-line="31" selection-start-column="99" selection-end-line="31" selection-end-column="99" />
+        <state vertical-scroll-proportion="0.6231454">
+          <caret line="42" column="140" selection-start-line="42" selection-start-column="140" selection-end-line="42" selection-end-column="140" />
           <folding />
         </state>
       </provider>
