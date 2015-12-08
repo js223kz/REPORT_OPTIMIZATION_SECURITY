@@ -17,7 +17,7 @@ Alla andra komponenter som t ex bilder, css- och skriptfiler, som det refereras 
 för resterande 80-90%, [1, s.1], [3]. Längre laddningstider innebär sämre användarupplevelse.
 Det finns flera sätt att minska på antalet Http-förfrågningar. Nedan listar jag några som rör just den här applikationen.
 
-<h5>Ta bort oanvända resurser<h5>
+<h5>Ta bort oanvända resurser</h5>
 En bild som laddas, men aldrig syns, b.jpeg, skapar onödig laddningstid.<br>
 Browsern försöker ladda, men servern skickar tillbaka en 404:a, materialize.js, skapar onödig laddningstid.<br>
 Filer som inte laddas, men som heller inte används, clock.png, delete.png, favicon.png, dump.html.<br>
@@ -55,7 +55,7 @@ komponenter är hur man sköter versionshantering och uppdatering av filer. Läs
 
 <h3>Minska laddningstider på Http-förfrågningar</h3>
 
-<h5>Komprimera filer, [5]<h5>
+<h5>Komprimera filer, [5]</h5>
 Svarstiden från servern är kortare ju mindre storleken är på svaret. Att komprimera HTTP-svaren är ett kraftfullt sätt att
 minska laddningstiderna. Detta är den lättaste och mest effektiva åtgärden att genomföra, [5, s.29].
 
