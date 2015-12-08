@@ -49,7 +49,7 @@ användarupplevelsen och jag rekommenderar verkligen att det implementeras [4, s
 css- och skriptfiler i applikationen cachas. Något man dock tänka på när man låter browsers och proxies cacha
 komponenter är hur man sköter versionshantering och uppdatering av filer. Läs mer om Revving Filenames [4, s.27].
 
-<h5>Slå ihop filer<h5>
+<h5>Slå ihop filer</h5>
 
 
 
@@ -73,7 +73,7 @@ genom att sätta en Vary Header, eller Cache Control Private [5, s.33-24].
 Slutsats: Man måste som med alla dessa optimeringsåtgärder väga för- och nackdelar mot varandra. Applikationen, som den är nu,
 komprimerar inga filer. Jag tycker det är värt ett försök då vinningen kan bli väldigt stor.
 
-<h5>Referenser till CSS-filer ska ligga i HEAD-taggen, [6]<h5>
+<h5>Referenser till CSS-filer ska ligga i HEAD-taggen, [6]</h5>
 En browser laddar ett HTML-dokument uppifrån och ner. När css-filer placeras i slutet av Html-dokumentet blockerar
 browsern rendering av alla element för att slippa rendera om något ifall css-koden kommer att förändra något av dessa element.
 Det är inte det att laddningstiden faktiskt är kortare om man placerar css-filen högst upp, tvärtom, men eftersom inget
@@ -83,7 +83,7 @@ ut ostylade till att börja med, vilket också det ger en dålig användarupplev
 
 Slutsats: se filerna message/views/admin.html, message/views/index.Html
 
-<h5>Referenser till skriptfiler ska ligga långt ner i body-taggen, [7]<h5>
+<h5>Referenser till skriptfiler ska ligga långt ner i body-taggen, [7]</h5>
 Som regel använder sig en browser av det som kallas parallell nerladdning, dvs att den laddar två komponenter i taget.
 Är applikationen fördelad över två "hosts" betyder det att fyra komponenter laddas parallellt. När ett skript laddas blockerar
 det renderingen av alla komponenter som ligger efter skriptet även om komponenterna ligger på en annan host. Blockeringen sker
