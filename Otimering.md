@@ -17,14 +17,14 @@ Alla andra komponenter som t ex bilder, css- och skriptfiler, som det refereras 
 för resterande 80-90%, [1, s.1], [3]. Längre laddningstider innebär sämre användarupplevelse.
 Det finns flera sätt att minska på antalet Http-förfrågningar. Nedan listar jag några som rör just den här applikationen.
 
-<p><bold>Ta bort oanvända resurser</bold></p>
+<h5>Ta bort oanvända resurser<h5>
 En bild som laddas, men aldrig syns, b.jpeg, skapar onödig laddningstid.<br>
 Browsern försöker ladda, men servern skickar tillbaka en 404:a, materialize.js, skapar onödig laddningstid.<br>
 Filer som inte laddas, men som heller inte används, clock.png, delete.png, favicon.png, dump.html.<br>
 
 Rensa bort outnyttjade resurser även om de inte förlänger laddningstiderna.
 
-<h3>Cachea komponenter [4]</h3>
+<h5>Cachea komponenter [4]</h5>
 Första gången en användare besöker en sida laddas alla komponenter in och laddningstiden blir längre. Hur lång den
 sedan blir vid efterföljande besök på samma sida beror på huruvida komponenterna cachas eller inte. Dynamiska HTML-sidor
 cachar man inte, men bilder, css- och skriptfiler går alldeles utmärkt att cacha om de inte ändras stup i kvarten.
@@ -42,17 +42,36 @@ Använder man inte future expires kommer browsern ändå att spara resursen i si
 skicka en sk Conditional GET till servern. Om komponenten inte har ändrats skickar servern tillbaka ett svar till browsern
 att använda den komponent den har i sin cache. Med andra ord en onödig tripp till servern som förlänger sidans laddningstid, [2], [4, s.28].
 
-I denna applikationen är alla komponenters Future Expire satt till -1, vilket säger till browsern att inte cacha något.
+I denna applikation är alla komponenters Future Expire satt till -1, vilket säger till browsern att inte cacha något.
 
 Slutsats: eftersom applikationens användare kommer att vara återkommande besökare är cachning en viktigt åtgärd för
 användarupplevelsen och jag rekommenderar verkligen att det implementeras [4, s.24-25]. I min bedömning kan alla bilder,
 css- och skriptfiler i applikationen cachas. Något man dock tänka på när man låter browsers och proxies cachea
 komponenter är hur man sköter versionshantering och uppdatering av filer. Läs mer om Revving Filenames [4, s.27].
 
+<h5>Slå ihop filer<h5>
 
 
 
+<h3>Minska laddningstider på Http-förfrågningar</h3>
 
+<h5>Komprimera filer, [5]<h5>
+Svarstiden från servern är kortare ju mindre storleken är på svaret. Att komprimera HTTP-svaren är ett kraftfullt sätt att
+minska laddningstiderna. Detta är den lättaste och mest effektiva åtgärden att genomföra, [5, s.29].
+
+Om klienten stödjer kompression av filer visar den det genom att skicka en Accept Encoding header. När servern ser detta
+kan den komprimera filerna enligt de metoder klienten stödjer. Mest vanligt och bäst är att använda gzip.
+Det går att komprimera alla textsvar inklusive JSON och XML. Bilder och PDF:er bör inte komprimeras då detta redan är
+gjort och bara kommer att slösa processorkraft. Då det tar kraft att både komprimera och dekomprimera filer bör man ha som
+huvudregel att inte komprimera filer på mindre än 1-2K, [5, s.29-31].
+
+Man bör vara medveten om att komprimeringsprocessen kan bli något mer komplicerad om klienten går via en proxyserver.
+Proxyservern cachar möjligtvis komprimerade filer om användare nr 1 stödjer detta. När användare nr 2, som inte stödjer
+komprimering skickar en förfrågan via proxyn som svarar den med samma komprimerade filer. Inte bra, men går att komma runt
+genom att sätta en Vary Header, eller Cache Control Private [5, s.33-24].
+
+Man måste som med alla dessa optimeringsåtgärder väga för- och nackdelar mot varandra. Applikationen, som den är nu,
+komprimerar inga filer. Jag tycker det är värt ett försök då vinningen kan bli väldigt stor.
 
 
 
@@ -70,4 +89,7 @@ Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 10.
 
 [4] Steve Souders, Rule 3: add an expires header i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
 Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 22-28.
+
+[5] Steve Souders, Rule 4:  Gzip components i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 29-36.
 
