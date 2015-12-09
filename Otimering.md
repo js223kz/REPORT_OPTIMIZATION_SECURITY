@@ -10,12 +10,12 @@ kan jag inte uttala mig om miskade kostnader i utnyttjandet av bandbredd,
 men vid ett stort antal användare blir det en trevlig bonus.</p>
 
 
-<h3>Minska antalet Http-förfrågningar</h3>
+<h3>Minska antalet Http-anrop</h3>
 Ju fler förfrågningar som skickas från browsern till webbservern ju längre tid ta sidan att laddas.
 Faktum är att enligt undersökningar står HTML-dokumentet endast av 10-20% av laddningstiden för slutanvändaren.
 Alla andra komponenter som t ex bilder, css- och skriptfiler, som det refereras till i HTML-dokumentet står
 för resterande 80-90%, [1, s.1], [3]. Längre laddningstider innebär sämre användarupplevelse.
-Det finns flera sätt att minska på antalet Http-förfrågningar. Nedan listar jag några som rör just den här applikationen.
+Det finns flera sätt att minska på antalet Http-anrop. Nedan listar jag några som rör just den här applikationen.
 
 <h5>Ta bort oanvända resurser</h5>
 En bild som laddas, men aldrig syns, b.jpeg, skapar onödig laddningstid.<br>
@@ -24,21 +24,21 @@ Filer som inte laddas, men som heller inte används, clock.png, delete.png, favi
 
 Slutsats: Rensa bort outnyttjade resurser som förlänger laddningstiderna och "döda filer" som inte används.
 
-<h5>Cachea komponenter [4]</h5>
+<h5>Cacha komponenter [4]</h5>
 Första gången en användare besöker en sida laddas alla komponenter in och laddningstiden blir längre. Hur lång den
 sedan blir vid efterföljande besök på samma sida beror på huruvida komponenterna cachas eller inte. Dynamiska HTML-sidor
 cachar man inte, men bilder, css- och skriptfiler går alldeles utmärkt att cacha om de inte ändras stup i kvarten.
-Gör en utvärdering av komponenterna som laddas, har de inte ett närliggande "last modified datum" är de säkert kandidater för
+Gör en utvärdering av komponenterna som laddas, har de inte ett närliggande "last modified date" är de säkert kandidater för
 cachning [4, s.22-27].
 
 Som utvecklare kan man säkerställa att komponenter sparas i browserns cache genom att lägga till en Future Expires Header.
 Future Expires Header använder ett specifikt datum för att hålla koll på när en komponent måste laddas om. Det innebär
 att när det datumet löper ut måste servern tillhandahålla ett nytt datum [4, s.22-23].<br>
-Ett smidigare sätt är då att använda Cache-control och Max Age, som bestämmer hur länge en komponent får cachas i sekunder.
-De browsers som inte stödjer HTTP/1.1 kan inte använda Cache-Control, men då det är väldigt få bör det inte ställa till
+Ett smidigare sätt är då att använda Cache Control och Max Age, som bestämmer hur länge en komponent får cachas i sekunder.
+De browsers som inte stödjer HTTP/1.1 kan inte använda Cache Control, men då det är väldigt få bör det inte ställa till
 några problem [4, s.22-24].
 
-Använder man inte future expires kommer browsern ändå att spara resursen i sin cache och sedan när resursen efterfrågas
+Använder man inte Future Expires kommer browsern ändå att spara resursen i sin cache och sedan när resursen efterfrågas
 skicka en sk Conditional GET till servern. Om komponenten inte har ändrats skickar servern tillbaka ett svar till browsern
 att använda den komponent den har i sin cache. Med andra ord en onödig tripp till servern som förlänger sidans laddningstid, [2], [4, s.28].
 
@@ -46,20 +46,22 @@ I denna applikation är alla komponenters Future Expire satt till -1, vilket sä
 
 Slutsats: eftersom applikationens användare kommer att vara återkommande besökare är cachning en viktigt åtgärd för
 användarupplevelsen och jag rekommenderar verkligen att det implementeras [4, s.24-25]. I min bedömning kan alla bilder,
-css- och skriptfiler i applikationen cachas. Något man dock tänka på när man låter browsers och proxies cacha
+css- och skriptfiler i applikationen cachas. Något man dock bör tänka på när man låter browsers och proxies cacha
 komponenter är hur man sköter versionshantering och uppdatering av filer. Läs mer om Revving Filenames [4, s.27].
 
 <h5>Slå ihop filer</h5>
 Flera filer betyder flera HTTP-anrop och längre laddningstid. Det betyder inte att man ska trycka in all kod i en fil,
 men i den här applikationen hade jag integrerat head.html i Default.html.
 
+Slutsats: Integrera head.html i Default.html.
 
 
-<h3>Minska laddningstider på Http-förfrågningar</h3>
+
+<h3>Minska laddningstider på Http-anrop</h3>
 
 <h5>Komprimera filer, [5]</h5>
 Svarstiden från servern är kortare ju mindre storleken är på svaret. Att komprimera HTTP-svaren är ett kraftfullt sätt att
-minska laddningstiderna. Detta är den lättaste och mest effektiva åtgärden att genomföra, [5, s.29].
+minska laddningstiderna. Det är den lättaste och mest effektiva åtgärden att genomföra, [5, s.29].
 
 Om klienten stödjer kompression av filer visar den det genom att skicka en Accept Encoding header. När servern ser detta
 kan den komprimera filerna enligt de metoder klienten stödjer. Mest vanligt och bäst är att använda gzip.
@@ -68,8 +70,8 @@ gjort och bara kommer att slösa processorkraft. Då det tar kraft att både kom
 huvudregel att inte komprimera filer på mindre än 1-2K, [5, s.29-31].
 
 Man bör vara medveten om att komprimeringsprocessen kan bli något mer komplicerad om klienten går via en proxyserver.
-Proxyservern cachar möjligtvis komprimerade filer om användare nr 1 stödjer detta. När användare nr 2, som inte stödjer
-komprimering skickar en förfrågan via proxyn som svarar den med samma komprimerade filer. Inte bra, men går att komma runt
+Proxyservern cachar komprimerade filer om användare nr 1 stödjer detta. När användare nr 2, som inte stödjer
+komprimering skickar en förfrågan via proxyn som svarar den tillbaka med samma komprimerade filer. Inte bra, men går att komma runt
 genom att sätta en Vary Header, eller Cache Control Private [5, s.33-24].
 
 Slutsats: Man måste som med alla dessa optimeringsåtgärder väga för- och nackdelar mot varandra. Applikationen, som den är nu,
@@ -77,11 +79,12 @@ komprimerar inga filer. Jag tycker det är värt ett försök då vinningen kan 
 
 <h5>Referenser till CSS-filer ska ligga i HEAD-taggen, [6]</h5>
 En browser laddar ett HTML-dokument uppifrån och ner. När css-filer placeras i slutet av Html-dokumentet blockerar
-browsern rendering av alla element för att slippa rendera om något ifall css-koden kommer att förändra något av dessa element.
-Det är inte det att laddningstiden faktiskt är kortare om man placerar css-filen högst upp, tvärtom, men eftersom inget
-renderar ut förrän css-filen har laddats upplevs laddningstiden som längre. Psykologiskt spelar detta roll då en helt,
-blank, vit sida som inte visar några synliga tecken på att ladda gör användaren frusterad. I vissa browsers renderas elementen
-ut ostylade till att börja med, vilket också det ger en dålig användarupplevelse och badwill för sidägaren, [5, s.37-38].
+browsern rendering av alla element tills dess att css-filen är laddad. Detta för att slippa rendera om element ifall
+css-koden kommer att förändra något av dessa element.Det är inte det att laddningstiden faktiskt är kortare om man placerar
+css-filen högst upp, tvärtom, men eftersom inget renderar ut förrän css-filen har laddats upplevs laddningstiden som längre.
+Psykologiskt spelar detta roll då en helt, blank, vit sida som inte visar några synliga tecken på att ladda gör användaren frusterad.
+I vissa browsers renderas elementen ut ostylade till att börja med, vilket också det ger en dålig användarupplevelse och
+badwill för sidägaren, [5, s.37-38].
 
 Slutsats: se filerna message/views/admin.html, message/views/index.Html
 
@@ -104,7 +107,7 @@ layouten, Default.html
 
 Slutsats: bryt ut css-koden från message/views/admin.html, message/views/index.Html och lägg i en egen css-fil. Jag skulle
 också tagit all css från siteViews/css/signin.css och lagt i samma fil. Det är så lite kod att jag inte kan försvara två
-HTTP-förfrågningar istället för en. Läs in filen en gång i Default.html
+HTTP-förfrågningar istället för en. Läs in filen en gång i Default.html i head-taggen.
 
 <h5>Minifiera Javascriptfiler, [9]</h5>
 Minifiera alla javascriptfiler med JSMIn och få bort alla kommentarer och onödiga mellanslag.
