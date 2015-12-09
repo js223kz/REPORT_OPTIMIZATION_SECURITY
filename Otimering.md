@@ -1,5 +1,5 @@
 <h1>Optimering</h1>
-<p><i>This text is italic</i>.</p>
+
 <p>Det finns en del utrymme för optimering av applikationens prestanda.
 Jag har i första hand tittat på hur applikationen kan optimeras frontend
 och det med relativt enkla åtgärder. Säkerhetsapekten är såklart den viktigaste,
@@ -112,38 +112,33 @@ Minifiera alla javascriptfiler med JSMIn och få bort alla kommentarer och onöd
 minimera css-filerna då det inte ger något större resultat. Se hellre till att ta bort död kod som jag har obeserverat
 finns lite här och där.
 
-<h5>Minifiera Javascriptfiler, [9]</h5>
-
-
-
-
 
 <h3>Referenser</h3>
 
-[1] Steve Souders, The importance of web performance i High Performance Web Sites: Essential Knowledge for Frontend Engineers,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 1-5.
+<P>[1] Steve Souders, The importance of web performance i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 1-5.</p>
 
-[2] Steve Souders, HTTP overview i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 6-9.
+<P>[2] Steve Souders, HTTP overview i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 6-9.</p>
 
-[3] Steve Souders, Rule 1: make fewer http requests i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 10.
+<P>[3] Steve Souders, Rule 1: make fewer http requests i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 10.</p>
 
-[4] Steve Souders, Rule 3: add an expires header i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 22-28.
+<P>[4] Steve Souders, Rule 3: add an expires header i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 22-28.</p>
 
-[5] Steve Souders, Rule 4: gzip components i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 29-36.
+<P>[5] Steve Souders, Rule 4: gzip components i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 29-36.</p>
 
-[6] Steve Souders, Rule 5: put stylesheets at the top i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 37-44.
+<P>[6] Steve Souders, Rule 5: put stylesheets at the top i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 37-44.</p>
 
-[7] Steve Souders, Rule 6: put scripts at the bottom i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 45-50.
+<P>[7] Steve Souders, Rule 6: put scripts at the bottom i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 45-50.</p>
 
-[8] Steve Souders, Rule 8: make javascript and css external i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 55-62.
+<P>[8] Steve Souders, Rule 8: make javascript and css external i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 55-62.</p>
 
-[9] Steve Souders, Rule 10: minify javascript i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
-Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 69-75.
+<P>[9] Steve Souders, Rule 10: minify javascript i <i>High Performance Web Sites: Essential Knowledge for Frontend Engineers</i>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 69-75.</p>
 
