@@ -1,5 +1,5 @@
 <h1>Optimering</h1>
-
+<p><i>This text is italic</i>.</p>
 <p>Det finns en del utrymme för optimering av applikationens prestanda.
 Jag har i första hand tittat på hur applikationen kan optimeras frontend
 och det med relativt enkla åtgärder. Säkerhetsapekten är såklart den viktigaste,
