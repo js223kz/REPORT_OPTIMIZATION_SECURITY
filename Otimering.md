@@ -50,6 +50,8 @@ css- och skriptfiler i applikationen cachas. Något man dock tänka på när man
 komponenter är hur man sköter versionshantering och uppdatering av filer. Läs mer om Revving Filenames [4, s.27].
 
 <h5>Slå ihop filer</h5>
+Flera filer betyder flera HTTP-anrop och längre laddningstid. Det betyder inte att man ska trycka in all kod i en fil,
+men i den här applikationen hade jag integrerat head.html i Default.html.
 
 
 
@@ -87,11 +89,30 @@ Slutsats: se filerna message/views/admin.html, message/views/index.Html
 Som regel använder sig en browser av det som kallas parallell nerladdning, dvs att den laddar två komponenter i taget.
 Är applikationen fördelad över två "hosts" betyder det att fyra komponenter laddas parallellt. När ett skript laddas blockerar
 det renderingen av alla komponenter som ligger efter skriptet även om komponenterna ligger på en annan host. Blockeringen sker
-därför att skriptet kanske anvnder sig av document.write för att förändra hur sidan ska renderas. Alltså väntar browsern hellre
+därför att skriptet kanske använder sig av document.write för att förändra hur sidan ska renderas. Alltså väntar browsern hellre
 på att skriptet laddats klart. Ett annat skäl är att browsern vill försäkra sig om att skripten laddas i rätt ordning med hänsyn
 till dependecies och liknande. Det går inte att förlita sig på sk Deferred Scripts.
 
 Slutsats: se filen siteViews/partials/head.html där script-taggar ligger i Head-taggen.
+
+<h5>Lägg styling i externa filer, [8]</h5>
+Även om inline styling vanligtvis ger kortare laddningstid än att använda externa filer skulle jag i den här applikationen
+rekommendera att bryta ut all styling i en egen fil. På så sätt får man bort all duplicerad kod och gör stylingen lättare
+att underhålla. Det ger även den fördelen att css-filerna kan cachas på klienten och behöver således inte laddas in varje
+gång en sida efterfrågas efter den första förfrågan [8, 55-57]. Referera till css-filen i HTML-filen som renderar den övergripande
+layouten, Default.html
+
+Slutsats: bryt ut css-koden från message/views/admin.html, message/views/index.Html och lägg i en egen css-fil. Jag skulle
+också tagit all css från siteViews/css/signin.css och lagt i samma fil. Det är så lite kod att jag inte kan försvara två
+HTTP-förfrågningar istället för en. Läs in filen en gång i Default.html
+
+<h5>Minifiera Javascriptfiler, [9]</h5>
+Minifiera alla javascriptfiler med JSMIn och få bort alla kommentarer och onödiga mellanslag.
+Är filerna redan komprimerade kommer en minifiering ge ytterligare 20% kortare laddningstid. Bry er inte om att
+minimera css-filerna då det inte ger något större resultat. Se hellre till att ta bort död kod som jag har obeserverat
+finns lite här och där.
+
+<h5>Minifiera Javascriptfiler, [9]</h5>
 
 
 
@@ -119,4 +140,10 @@ Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 37-44.
 
 [7] Steve Souders, Rule 6: put scripts at the bottom i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
 Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 45-50.
+
+[8] Steve Souders, Rule 8: make javascript and css external i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 55-62.
+
+[9] Steve Souders, Rule 10: minify javascript i <italic>High Performance Web Sites: Essential Knowledge for Frontend Engineers</italic>,
+Redaktör, Andy Oram. Sebastopol, California: O'Reilly Media, 2007, 69-75.
 
