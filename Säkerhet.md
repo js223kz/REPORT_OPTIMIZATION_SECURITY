@@ -40,20 +40,40 @@ Tänk på vad som kan hända om en attacker får tag på hela tabeller med anvä
 i klartext.
 
 <b>Nuläge:</b>
-Lösenorden lagras i databasen i klartext. Vad jag kan se sker ingen verifiering av användaren inskrivet lösenord med
+Lösenorden lagras i databasen i klartext. Vad jag kan se sker ingen verifiering av användaren inmatat lösenord med
 ett saltat+hashat lösenord från databasen.
 
 <b>Åtgärder:</b>
 Lösenord bör saltas och hashas innan de sparas i databasen. När en användare sedan loggar in verifierar man det inskrivna
 lösenordet mot det saltade+hashade som finns i databasen. Ett saltat+hashat lösenord kan aldrig återställas och om två olika
 användare har samma lösenord blir saltning+hashning aldrig samma. Visst, man förhindrar inte att en attacker kan komma åt
-tablelen med uppgifter, men man gör det i stort sett omöjligt för dem att knäcka lösenorden. Man bör också se till att varje
+tabellen med uppgifter, men man gör det i stort sett omöjligt för dem att knäcka lösenorden. Man bör också se till att varje
 enskild användare har ett eget unikt salt [5].
 
+<h5>Sessionshantering vid inloggning, [4]</h5>
+Det är självklart att sätta sessioner för att behålla information genom hela applikationen när en inloggare har loggat in.
+Annars skulle en användare vara tvungen att logga in vid varje ny förfrågan och det är ohållbart. Något att tänka på när man
+sätter sessioner är dock att det är guld för en attacker att få tag på en legitim session som används för att bekräfta att den
+användare är inloggad. Får de tag på det kan de utge sig för att vara den legitime användaren och göra allt som den kan.
 
-<h5>Sessionshantering</h5>
+<b>Nuläge:</b>
+Som det är nu används användarid som ett av sessionsvärdena och användarens roll i klartext som värde i den andra.
 
-logout: kan fortfarande nå localhost:8080/messages efter logout
+<b>Åtgärder:</b>
+Byt namnen till något mindre uppenbart och värden till något mindre känsligt. Rollen som admin är typiskt farlig då den
+är lätt att gissa sig till värdet "admin" och såklart värdefull att komma åt.
+
+<h5>Sessionshantering vid utloggning, [4]</h5>
+Ha man satt sessioner vid t ex inloggning måste man vara noga med att de förstörs när en användare loggar ut, [6].
+När en legitim användare loggat ut och lämnar datorn är det fullt möjligt för vem som helst att besöka de sidor den
+legitime användaren just besökt på samma dator om man inte ser till att sessionerna förstörs.
+
+<b>Nuläge:</b>
+Det går fortfarande nå localhost:8080/messages även efter att ha loggat ut. Sessionen userId sätts till 0 och sessionen
+role hanteras inte alls.
+
+<b>Åtgärder:</b>
+Sätt båda sessionerna till null vid utloggning.
 
 
 
@@ -68,4 +88,6 @@ logout: kan fortfarande nå localhost:8080/messages efter logout
 [4] "Top 10 2013-A2-Broken Authentication and Session Management" OWASP, juni 2013 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management [Hämtad: 11 december, 2015].
 
 [5] "Password storage cheat sheet" OWASP, november 2013 [Online] Tillgänglig: https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet [Hämtad: 11 december, 2015].
+
+[6] "Session management cheat sheet" OWASP, oktober 2015 [Online] Tillgänglig: https://www.owasp.org/index.php/Session_Management_Cheat_Sheet [Hämtad: 11 december, 2015].
 
