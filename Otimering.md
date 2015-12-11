@@ -1,4 +1,7 @@
-<h1>Optimering</h1>
+<h5>Rapport skriven av Johanna Szepanski js223kz</h5>
+
+
+<h1>Optimeringsförslag i applikationen https://github.com/thajo/messy_labbage</h1>
 
 <p>Det finns en del utrymme för optimering av applikationens prestanda.
 Jag har i första hand tittat på hur applikationen kan optimeras frontend
