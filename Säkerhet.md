@@ -102,6 +102,35 @@ Rensa bort debugmeddelanden innan deployment. Se över felmeddelande så att de 
 Skydda vägen till databasen genom att använda config-filen, [9]-[10]. Ställ in vilka filer som inte ska vara möjliga att komma åt.
 Använd .htaccess, [11].
 
+<h5>Auktorisering av särskilda funktioner, [12]</h5>
+För att säkerställa att obehöriga personer inte kan utföra vissa handlingar i en applikation måste användaren auktoriseras
+och autentiseras på servern innan dessa funktioner kan köras. Det handlar helt enkelt om att begränsa tillgången till vissa url:er
+beroende av nivå av behörighet i applikationen.
+
+<b>Nuläge:</b>
+Jag kan komma åt och läsa alla meddelanden från databasen genom att helt enkelt ange url:en localhost:8080/message/data
+Eftersom jag kan komma åt och läsa data om alla meddelanden kan jag lätt radera ett genom att ange url:en localhost:8080/message/delete/?id=44
+Detta kan jag göra utan att vara inloggad.
+
+<b>Åtgärder:</b>
+Kontrollera behörighet på servern före applikationen listar alla meddelanden eller raderar ett meddelande, [13].
+
+<h5>Inför unika tokens vid alla POST-anrop, [14]</h5>
+En elak användare kan skapa falska Http-anrop och tvinga en legitim, inloggad användare att utföra anropet, genom t ex en XSS-attack.
+Attackern kan skapa POST-anrop, men inte få information genom GET-anrop, en sk Cross Site Request Forgery CSRF. Om attackern lyckas
+innebär detta att hen kan skicka meddelanden och radera meddelanden i er applikation.
+
+<b>Nuläge:</b>
+Jag ser att det finns en tanke på att skydda applikationen mot denna typ av attack när jag kollar i filen
+siteViews/javascript/MessageBoard.js, men det är inte implementerat.
+
+<b>Åtgärder:</b>
+Synchronized Token Pattern. Lägg ett hidden field i alla formulär. Generera ett unikt, slumpmässigt token som värde till det fältet. Kontrollera på servern
+att det existerar ett sådan token och att det är giltigt innan applikationen utför handlingen. Att bara kontrollera att användaren är
+inloggad hjälper inte eftersom attackern automatiskt är inloggad via den legitime användaren vid den här typen av attacker. Det går också att använda CAPTCHA, men jag tycker det
+är lite omständligt för användaren i den här typen av applikation. Kontrollera också origin header vid anropet, [15].
+
+
 
 
 <h3>Referenser</h3>
@@ -131,4 +160,12 @@ Använd .htaccess, [11].
 [10] "Error Handling" OWASP, juni 2009 [Online] Tillgänglig: https://www.owasp.org/index.php/Error_Handling [Hämtad: 11 december, 2015].
 
 [11] Egen kunskap, vet inte var jag lärde mig det.
+
+[12] "Top 10 2013-A7-Missing Function Level Access Control" OWASP, juni 2013 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A7-Missing_Function_Level_Access_Control [Hämtad: 11 december, 2015].
+
+[13] "Top 10 2007-Failure to Restrict URL Access" OWASP, april 2010 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2007-Failure_to_Restrict_URL_Access [Hämtad: 11 december, 2015].
+
+[14] "Top 10 2013-A8-Cross-Site Request Forgery (CSRF)" OWASP, september 2013 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_%28CSRF%29 [Hämtad: 11 december, 2015].
+
+[15] "Cross-site request forgery (CSRF) prevention cheat sheet" OWASP, december 2015 [Online] Tillgänglig: https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet [Hämtad: 11 december, 2015].
 
