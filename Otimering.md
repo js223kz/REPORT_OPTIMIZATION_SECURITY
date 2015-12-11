@@ -59,7 +59,6 @@ men i den här applikationen hade jag integrerat head.html i Default.html.
 Slutsats: Integrera head.html i Default.html.
 
 
-
 <h3>Minska laddningstider på Http-anrop</h3>
 
 <h5>Komprimera filer, [5]</h5>

@@ -8,19 +8,19 @@ för att motverka respektive attack.
 Attacker genom SQL injection utförs genom att någon med onda avsikter skjuter in skadlig kod i databaser, med syftet
 att förstöra, komma åt konfidentiella uppgifter eller att i ett senare skede få ut den koden till snälla användares browsers.
 Den skadliga koden skickas med anrop till en applikationen och hanteras på samma sätt som data från ett vanligt formulär eller
-inputfält.
-
-<b>Åtgärder:</b>
-Jag kan inte se att det sker någon validering av indata från användaren. T ex har jag kunnat skriva in <script></script>,
+inputfält. Jag kan inte se att det sker någon validering av indata från användaren. T ex har jag kunnat skriva in "<script></script>",
 i textfältet för meddelande och det har utan förändring lagrats i databasen.
 
+
+<b>Åtgärder:</b>
 Validera all indata. Strippa text från farliga tecken såsom < och >. Det finns escapemetoder i de flesta programmeringsspråk
 som hanterar detta. Valideringen bör ske både på klient och server.
 
-Använd prepared statements med variabel bindning, sk parameterized queries, i all kommunikation med databasen. I parameterized queries
+Använd prepared statements med variabelbindning, sk parameterized queries, i all kommunikation med databasen. I parameterized queries
 definerar man först all Sql-kod, sen skickar man in parametrarna till frågan. Det betyder att databasen kan skilja mellan kod och
 data oavsett vad användaren har skickat in. Prepared statements säkerställer att en attacker inte kan ändra avsikten med databasfrågan
-och bör alltid användas, [2]-[3]. Det är redan gjort när meddelanden läggs till databasen så det är bara att kopiera det exemplet.
+och bör alltid användas, [2]-[3]. Det är redan gjort när meddelanden läggs till databasen så det är bara att kopiera det exemplet och
+använda i login.js.
 
 Databasen SQLite 3 som används i det här fallet stödjer inte lagrade procedurer annars skulle jag rekommenderat det.
 Skriver lite om det ändå ifall ni skulle ändra valet av databas. Skillanden mellan lagrade procedurer
@@ -70,8 +70,7 @@ browser. Vad händer om denna snälla användare klickar på den länken? Ja, de
 är väldigt populärt.
 
 <b>Åtgärder:</b>
-
-Som det är nu kan jag skicka in skadlig kod som lagras i databasen, exemplet med <script></script>, men den renderas inte ut i lista över meddelanden.
+Som det är nu kan jag skicka in skadlig kod som lagras i databasen, exemplet med "<script></script>", men den renderas inte ut i listan med meddelanden.
 Det betyder att det finns någon form av validering av utdata. Om jag inte har helt fel för mig ligger valideringen som ett reguljärt uttryck i jquery.js.
 Jag skulle dock ha gjort denna validering redan på servern för att det aldrig någonsin ska skickas skadlig kod från servern till
 klienten. Använd inbyggda escapemetoder som finns i programmeringsspråket. Reguljära uttryck är knepiga att få till rätt och gör
@@ -84,7 +83,6 @@ information om applikationens uppbyggnad bör aldrig följa med ut i deployad ap
 information en ett för användaren hjälpsamt meddelande. Alla sådan här läckor är väldigt hjälpsam information för en elak
 användare som försöker komma underfund med hur din applikation är uppbyggd och hur de ska hitta hål i säkerheten.
 
-
 <b>Åtgärder, [9]-[10]:</b>
 Rensa bort debugmeddelanden innan deployment.</br>
 Se över felmeddelande så att de inte bara skriver ut felet som automatgenereras.
@@ -95,12 +93,13 @@ att hämtas som en resurs i klienten. </br>
 Det ligger kvar en massa kommentarer i siteViews/javascript/MessageBoard.js som borde rensas bort.
 Den filen ska bara hämta inputdata från fälten, göra en första validering och skicka vidare validerad data till servern.
 
+
 <h5>Auktorisering av särskilda funktioner, [12]</h5>
 För att säkerställa att obehöriga personer inte kan utföra vissa handlingar i en applikation måste användaren auktoriseras
 och autentiseras på servern innan dessa funktioner kan köras. Det handlar helt enkelt om att begränsa tillgången till vissa url:er
-beroende av nivå av behörighet i applikationen.Som det är nu kan jag komma åt och läsa alla meddelanden från databasen
+beroende av nivå av behörighet i applikationen. Som det är nu kan jag komma åt och läsa alla meddelanden från databasen
 genom att helt enkelt ange url:en localhost:8080/message/data. Eftersom jag kan komma åt och läsa data om alla meddelanden
-kom jag snabbt fram till radera ett genom att ange url:en localhost:8080/message/delete/?id=44
+kom jag snabbt fram till att jag kan radera ett meddelande genom att ange url:en localhost:8080/message/delete/?id=44
 Detta kan jag göra utan att vara inloggad.
 
 <b>Åtgärder:</b>
