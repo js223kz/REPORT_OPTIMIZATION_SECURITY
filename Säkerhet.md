@@ -8,7 +8,7 @@ för att motverka respektive attack.
 Attacker genom SQL injection utförs genom att någon med onda avsikter skjuter in skadlig kod i databaser, med syftet
 att förstöra, komma åt konfidentiella uppgifter eller att i ett senare skede få ut den koden till snälla användares browsers.
 Den skadliga koden skickas med anrop till en applikationen och hanteras på samma sätt som data från ett vanligt formulär eller
-inputfält. Jag kan inte se att det sker någon validering av indata från användaren. T ex har jag kunnat skriva in "<script></script>",
+inputfält. Jag kan inte se att det sker någon validering av indata från användaren. T ex har jag kunnat skriva in skripttaggar,
 i textfältet för meddelande och det har utan förändring lagrats i databasen.
 
 
@@ -70,7 +70,7 @@ browser. Vad händer om denna snälla användare klickar på den länken? Ja, de
 är väldigt populärt.
 
 <b>Åtgärder:</b>
-Som det är nu kan jag skicka in skadlig kod som lagras i databasen, exemplet med "<script></script>", men den renderas inte ut i listan med meddelanden.
+Som det är nu kan jag skicka in skadlig kod som lagras i databasen, exemplet med skripttaggarna, men det renderas inte ut i listan med meddelanden.
 Det betyder att det finns någon form av validering av utdata. Om jag inte har helt fel för mig ligger valideringen som ett reguljärt uttryck i jquery.js.
 Jag skulle dock ha gjort denna validering redan på servern för att det aldrig någonsin ska skickas skadlig kod från servern till
 klienten. Använd inbyggda escapemetoder som finns i programmeringsspråket. Reguljära uttryck är knepiga att få till rätt och gör

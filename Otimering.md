@@ -25,7 +25,8 @@ En bild som laddas, men aldrig syns, b.jpeg, skapar onödig laddningstid.<br>
 Browsern försöker ladda, men servern skickar tillbaka en 404:a, materialize.js, skapar onödig laddningstid.<br>
 Filer som inte laddas, men som heller inte används, clock.png, delete.png, favicon.png, dump.html.<br>
 
-Slutsats: Rensa bort outnyttjade resurser som förlänger laddningstiderna och "döda filer" som inte används.
+<b>Åtgärd:</b>
+Rensa bort outnyttjade resurser som förlänger laddningstiderna och "döda filer" som inte används.
 
 <h5>Cacha komponenter [4]</h5>
 Första gången en användare besöker en sida laddas alla komponenter in och laddningstiden blir längre. Hur lång den
@@ -47,7 +48,8 @@ att använda den komponent den har i sin cache. Med andra ord en onödig tripp t
 
 I denna applikation är alla komponenters Future Expire satt till -1, vilket säger till browsern att inte cacha något, [5, s.39].
 
-Slutsats: eftersom applikationens användare kommer att vara återkommande besökare är cachning en viktigt åtgärd för
+<b>Åtgärd:</b>
+Eftersom applikationens användare kommer att vara återkommande besökare är cachning en viktigt åtgärd för
 användarupplevelsen och jag rekommenderar verkligen att det implementeras [4, s.24-25]. I min bedömning kan alla bilder,
 css- och skriptfiler i applikationen cachas. Något man dock bör tänka på när man låter browsers och proxies cacha
 komponenter är hur man sköter versionshantering och uppdatering av filer. Läs mer om Revving Filenames [4, s.27].
@@ -56,7 +58,8 @@ komponenter är hur man sköter versionshantering och uppdatering av filer. Läs
 Flera filer betyder flera HTTP-anrop och längre laddningstid. Det betyder inte att man ska trycka in all kod i en fil,
 men i den här applikationen hade jag integrerat head.html i Default.html.
 
-Slutsats: Integrera head.html i Default.html.
+<b>Åtgärd:</b>
+Integrera head.html i Default.html.
 
 
 <h3>Minska laddningstider på Http-anrop</h3>
@@ -76,7 +79,8 @@ Proxyservern cachar komprimerade filer om användare nr 1 stödjer detta. När a
 komprimering skickar en förfrågan via proxyn som svarar den tillbaka med samma komprimerade filer. Inte bra, men går att komma runt
 genom att sätta en Vary Header, eller Cache Control Private [5, s.33-24].
 
-Slutsats: Man måste som med alla dessa optimeringsåtgärder väga för- och nackdelar mot varandra. Applikationen, som den är nu,
+<b>Åtgärd:</b>
+Man måste som med alla dessa optimeringsåtgärder väga för- och nackdelar mot varandra. Applikationen, som den är nu,
 komprimerar inga filer. Jag tycker det är värt ett försök då vinningen kan bli väldigt stor.
 
 <h5>Referenser till CSS-filer ska ligga i HEAD-taggen, [6]</h5>
@@ -88,7 +92,8 @@ Psykologiskt spelar detta roll då en helt, blank, vit sida som inte visar någr
 I vissa browsers renderas elementen ut ostylade till att börja med, vilket också det ger en dålig användarupplevelse och
 badwill för sidägaren, [5, s.37-38].
 
-Slutsats: se filerna message/views/admin.html, message/views/index.Html
+<b>Åtgärd:</b>
+Se filerna message/views/admin.html, message/views/index.Html
 
 <h5>Referenser till skriptfiler ska ligga långt ner i body-taggen, [7]</h5>
 Som regel använder sig en browser av det som kallas parallell nerladdning, dvs att den laddar två komponenter i taget.
@@ -98,7 +103,8 @@ därför att skriptet kanske använder sig av document.write för att förändra
 på att skriptet laddats klart. Ett annat skäl är att browsern vill försäkra sig om att skripten laddas i rätt ordning med hänsyn
 till dependecies och liknande. Det går inte att förlita sig på sk Deferred Scripts.
 
-Slutsats: se filen siteViews/partials/head.html där script-taggar ligger i Head-taggen.
+<b>Åtgärd:</b>
+Se filen siteViews/partials/head.html där script-taggar ligger i Head-taggen.
 
 <h5>Lägg styling i externa filer, [8]</h5>
 Även om inline styling vanligtvis ger kortare laddningstid än att använda externa filer skulle jag i den här applikationen
@@ -107,7 +113,8 @@ att underhålla. Det ger även den fördelen att css-filerna kan cachas på klie
 gång en sida efterfrågas efter den första förfrågan [8, 55-57]. Referera till css-filen i HTML-filen som renderar den övergripande
 layouten, Default.html
 
-Slutsats: bryt ut css-koden från message/views/admin.html, message/views/index.Html och lägg i en egen css-fil. Jag skulle
+<b>Åtgärd:</b>
+Bryt ut css-koden från message/views/admin.html, message/views/index.Html och lägg i en egen css-fil. Jag skulle
 också tagit all css från siteViews/css/signin.css och lagt i samma fil. Det är så lite kod att jag inte kan försvara två
 HTTP-förfrågningar istället för en. Läs in filen en gång i Default.html i head-taggen.
 
