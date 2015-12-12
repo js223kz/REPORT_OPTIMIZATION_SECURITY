@@ -88,10 +88,8 @@ Rensa bort debugmeddelanden innan deployment.</br>
 Se över felmeddelande så att de inte bara skriver ut felet som automatgenereras.
 Skydda vägen till databasen genom att använda config-filen. </br>
 Ställ också in vilka filer som inte ska vara möjliga att komma åt genom att skydda känsliga mappar.</br>
-Innehållet i filen siteViews/javascript/Message.js borde kapslas in bättre och ligga på servern istället för
-att hämtas som en resurs i klienten. </br>
-Det ligger kvar en massa kommentarer i siteViews/javascript/MessageBoard.js som borde rensas bort.
-Den filen ska bara hämta inputdata från fälten, göra en första validering och skicka vidare validerad data till servern.
+Innehållet i filerna siteViews/javascript/Message.js och siteViews/javascript/MessageBoard.js borde kapslas in bättre och inte ge
+ifrån sig så mycket information.</br>
 
 
 <h5>Auktorisering av särskilda funktioner, [12]</h5>
@@ -103,7 +101,7 @@ kom jag snabbt fram till att jag kan radera ett meddelande genom att ange url:en
 Detta kan jag göra utan att vara inloggad.
 
 <b>Åtgärder:</b>
-Kontrollera behörighet på servern före applikationen listar alla meddelanden eller raderar ett meddelande, [13].
+Kontrollera behörighet och autentisera användaren på servern före applikationen listar alla meddelanden eller raderar ett meddelande, [13].
 
 <h5>Inför unika tokens vid alla POST-anrop, [14]</h5>
 En elak användare kan skapa falska Http-anrop och tvinga en legitim, inloggad användare att utföra anropet, genom t ex en XSS-attack.

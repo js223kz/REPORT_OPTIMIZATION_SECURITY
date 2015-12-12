@@ -26,17 +26,27 @@
         <entry file="file://$PROJECT_DIR$/Otimering.md">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="53" selection-start-line="0" selection-start-column="53" selection-end-line="61" selection-end-column="44" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="82" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Säkerhet.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Egna reflektioner.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Egna reflektioner.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.14836796">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Säkerhet.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Säkerhet.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.6172106">
-              <caret line="109" column="40" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="103" column="50" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -52,6 +62,7 @@
       <list>
         <option value="$PROJECT_DIR$/Otimering.md" />
         <option value="$PROJECT_DIR$/Säkerhet.md" />
+        <option value="$PROJECT_DIR$/Egna reflektioner.md" />
       </list>
     </option>
   </component>
@@ -206,18 +217,26 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Otimering.md">
+    <entry file="file://$PROJECT_DIR$/Säkerhet.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="53" selection-start-line="0" selection-start-column="53" selection-end-line="61" selection-end-column="44" />
+          <caret line="103" column="50" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Säkerhet.md">
+    <entry file="file://$PROJECT_DIR$/Otimering.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6172106">
-          <caret line="109" column="40" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Egna reflektioner.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14836796">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
