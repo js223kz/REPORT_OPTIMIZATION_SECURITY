@@ -20,6 +20,7 @@ Alla andra komponenter som t ex bilder, css- och skriptfiler, som det refereras 
 för resterande 80-90%, [1, s.1], [3]. Längre laddningstider innebär sämre användarupplevelse.
 Det finns flera sätt att minska på antalet Http-anrop. Nedan listar jag några som rör just den här applikationen.
 
+
 <h5>Ta bort oanvända resurser</h5>
 En bild som laddas, men aldrig syns, b.jpeg, skapar onödig laddningstid.<br>
 Browsern försöker ladda, men servern skickar tillbaka en 404:a, materialize.js, skapar onödig laddningstid.<br>
@@ -27,6 +28,7 @@ Filer som inte laddas, men som heller inte används, clock.png, delete.png, favi
 
 <b>Åtgärd:</b>
 Rensa bort outnyttjade resurser som förlänger laddningstiderna och "döda filer" som inte används.
+
 
 <h5>Cacha komponenter [4]</h5>
 Första gången en användare besöker en sida laddas alla komponenter in och laddningstiden blir längre. Hur lång den
@@ -54,6 +56,7 @@ användarupplevelsen och jag rekommenderar verkligen att det implementeras [4, s
 css- och skriptfiler i applikationen cachas. Något man dock bör tänka på när man låter browsers och proxies cacha
 komponenter är hur man sköter versionshantering och uppdatering av filer. Läs mer om Revving Filenames [4, s.27].
 
+
 <h5>Slå ihop filer</h5>
 Flera filer betyder flera HTTP-anrop och längre laddningstid. Det betyder inte att man ska trycka in all kod i en fil,
 men i den här applikationen hade jag integrerat head.html i Default.html.
@@ -63,6 +66,7 @@ Integrera head.html i Default.html.
 
 
 <h3>Minska laddningstider på Http-anrop</h3>
+
 
 <h5>Komprimera filer, [5]</h5>
 Svarstiden från servern är kortare ju mindre storleken är på svaret. Att komprimera HTTP-svaren är ett kraftfullt sätt att
@@ -83,6 +87,7 @@ genom att sätta en Vary Header, eller Cache Control Private [5, s.33-24].
 Man måste som med alla dessa optimeringsåtgärder väga för- och nackdelar mot varandra. Applikationen, som den är nu,
 komprimerar inga filer. Jag tycker det är värt ett försök då vinningen kan bli väldigt stor.
 
+
 <h5>Referenser till CSS-filer ska ligga i HEAD-taggen, [6]</h5>
 En browser laddar ett HTML-dokument uppifrån och ner. När css-filer placeras i slutet av Html-dokumentet blockerar
 browsern rendering av alla element tills dess att css-filen är laddad. Detta för att slippa rendera om element ifall
@@ -95,6 +100,7 @@ badwill för sidägaren, [5, s.37-38].
 <b>Åtgärd:</b>
 Se filerna message/views/admin.html, message/views/index.Html
 
+
 <h5>Referenser till skriptfiler ska ligga långt ner i body-taggen, [7]</h5>
 Som regel använder sig en browser av det som kallas parallell nerladdning, dvs att den laddar två komponenter i taget.
 Är applikationen fördelad över två "hosts" betyder det att fyra komponenter laddas parallellt. När ett skript laddas blockerar
@@ -105,6 +111,7 @@ till dependecies och liknande. Det går inte att förlita sig på sk Deferred Sc
 
 <b>Åtgärd:</b>
 Se filen siteViews/partials/head.html där script-taggar ligger i Head-taggen.
+
 
 <h5>Lägg styling i externa filer, [8]</h5>
 Även om inline styling vanligtvis ger kortare laddningstid än att använda externa filer skulle jag i den här applikationen
@@ -117,6 +124,7 @@ layouten, Default.html
 Bryt ut css-koden från message/views/admin.html, message/views/index.Html och lägg i en egen css-fil. Jag skulle
 också tagit all css från siteViews/css/signin.css och lagt i samma fil. Det är så lite kod att jag inte kan försvara två
 HTTP-förfrågningar istället för en. Läs in filen en gång i Default.html i head-taggen.
+
 
 <h5>Minifiera Javascriptfiler, [9]</h5>
 Minifiera alla javascriptfiler med JSMIn och få bort alla kommentarer och onödiga mellanslag.
